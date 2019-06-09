@@ -2,8 +2,11 @@ from pathlib import Path
 import urllib.request
 import xml.etree.ElementTree as ET
 
+#arguments
 podcast_rss = 'http://www2.jfn.co.jp/library/pod/podcast_sl.xml'
 write_folder = '/Users/laumandal/Downloads/SL'
+use_episode_title_as_filename = True
+
 
 # create folder if doesn't exist
 Path(write_folder).mkdir(parents=True, exist_ok=True)
@@ -22,7 +25,7 @@ print ('break (ctrl-C or stop button) to stop and continue later')
 for (idx,episode) in enumerate(channel.findall('item')):
     title = episode.find('title').text
     url = episode.find('enclosure').get('url')
-    fname = Path(url).name
+    fname = title+Path(url).suffix if use_episode_title_as_filename == True else Path(url).name
     write_path = Path(write_folder).joinpath(fname)
     
     if write_path.is_file():
