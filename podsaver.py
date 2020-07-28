@@ -63,8 +63,8 @@ if __name__ == "__main__":
     podcast_rss = args.podcast_rss
     kwargs = {}
     if args.folder:
-        kwargs['write_folder'] = args.s3_model_artifact
-    if args.folder:
+        kwargs['write_folder'] = args.folder
+    if args.titles_as_filename:
         kwargs['use_episode_title_as_filename'] = True
 
     download_podcasts(podcast_rss, **kwargs)
